@@ -1,5 +1,6 @@
 var naverShoppingHelper = {
   scrollPageToBottom: async function(step = 250, delay = 100) {
+    console.log('page scroll down...');
     const getScrollHeight = element => {
       if (!element) return 0;
       const { scrollHeight, offsetHeight, clientHeight } = element;
