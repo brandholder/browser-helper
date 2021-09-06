@@ -31,7 +31,9 @@ var naverShoppingHelper = {
       console.log(b.getAttribute('data-i') + '\n' + b.querySelector('span[class*="productContent_seller__"]').textContent + '\n' + b.querySelector('div[class*="productContent_info_title__"]').textContent + '\n' + b.querySelector('span[class*="productContent_price__"]').textContent + '\n' + b.href);
       var span = document.createElement('span');
       span.innerText = b.getAttribute('data-i');
+      span.style = 'color:blue;font-weight:bold;';
       b.closest('div').prepend(span);
+      b.style = 'padding-top:2px';
     }
   },
 }
