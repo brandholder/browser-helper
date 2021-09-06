@@ -1,13 +1,14 @@
 var naverShoppingHelper = {
   scrollPageToBottom: async function(step = 250, delay = 100) {
     console.log('page scroll down...');
+    
     const getScrollHeight = element => {
       if (!element) return 0;
       const { scrollHeight, offsetHeight, clientHeight } = element;
       return Math.max(scrollHeight, offsetHeight, clientHeight);
     };
 
-    const position = await new Promise(resolve => {
+    return await new Promise(resolve => {
       let count = 0;
       const intervalId = setInterval(() => {
         const { body } = document;
@@ -22,8 +23,6 @@ var naverShoppingHelper = {
         }
       }, delay);
     });
-
-    return position;
   },
   getCatalogProductLinks: async function() {
     await this.scrollPageToBottom();
