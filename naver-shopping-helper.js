@@ -30,12 +30,13 @@ var naverShoppingHelper = {
     for(var b of a){
       var mid = b.getAttribute('data-i');
       console.log(mid + '\n' + b.querySelector('span[class*="productContent_seller__"]').textContent + '\n' + b.querySelector('div[class*="productContent_info_title__"]').textContent + '\n' + b.querySelector('span[class*="productContent_price__"]').textContent + '\n' + b.href);
-      if (b.querySelector('#mid_' + mid)) continue;
+      var parentNode = b.closet('div');
+      if (parentNode.querySelector('#mid_' + mid)) continue;
       var span = document.createElement('span');
       span.id = 'mid_' + mid;
       span.innerText = mid;
       span.style = 'color:blue;font-weight:bold;';
-      b.closest('div').prepend(span);
+      parentNode.prepend(span);
       b.style = 'padding-top:2px';
     }
   },
