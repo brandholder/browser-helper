@@ -28,9 +28,12 @@ var naverShoppingHelper = {
     await this.scrollPageToBottom();
     var a = document.querySelectorAll('ul[class*="products_seller_list__"] li a[class*="productContent_link_seller__"]');
     for(var b of a){
-      console.log(b.getAttribute('data-i') + '\n' + b.querySelector('span[class*="productContent_seller__"]').textContent + '\n' + b.querySelector('div[class*="productContent_info_title__"]').textContent + '\n' + b.querySelector('span[class*="productContent_price__"]').textContent + '\n' + b.href);
+      var mid = b.getAttribute('data-i');
+      console.log(mid + '\n' + b.querySelector('span[class*="productContent_seller__"]').textContent + '\n' + b.querySelector('div[class*="productContent_info_title__"]').textContent + '\n' + b.querySelector('span[class*="productContent_price__"]').textContent + '\n' + b.href);
+      if (b.querySelector('#' + mid)) continue;
       var span = document.createElement('span');
-      span.innerText = b.getAttribute('data-i');
+      span.id = mid;
+      span.innerText = mid;
       span.style = 'color:blue;font-weight:bold;';
       b.closest('div').prepend(span);
       b.style = 'padding-top:2px';
