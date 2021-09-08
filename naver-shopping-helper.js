@@ -41,10 +41,18 @@ var naverShoppingHelper = {
       parentNode.prepend(span);
       b.style = 'padding-top:2px';
     }
-    var div = document.createElement('div');
-    div.innerHTML = mids.join('<br>');
-    div.style = 'margin:10px;';
-    document.querySelector('div[class*="seller_content_seller__"]').append(div);
+    
+    var rootNode = document.querySelector('div[class*="seller_content_seller__"]');
+    var divMids = rootNode.querySelector('#mids');
+    if (divMids) {
+      divMids.innerHTML = mids.join('<br>');
+    } else {
+      var div = document.createElement('div');
+      div.id = 'mids';
+      div.innerHTML = mids.join('<br>');
+      div.style = 'margin:10px;';
+      rootNode.append(div);
+    }
   },
 }
 
