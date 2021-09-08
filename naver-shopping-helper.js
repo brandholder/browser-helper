@@ -26,9 +26,11 @@ var naverShoppingHelper = {
   },
   getCatalogProductLinks: async function() {
     await this.scrollPageToBottom();
+    var mids = [];
     var a = document.querySelectorAll('ul[class*="products_seller_list__"] li a[class*="productContent_link_seller__"]');
     for(var b of a){
       var mid = b.getAttribute('data-i');
+      mids.push(mid);
       console.log(mid + '\n' + b.querySelector('span[class*="productContent_seller__"]').textContent + '\n' + b.querySelector('div[class*="productContent_info_title__"]').textContent + '\n' + b.querySelector('span[class*="productContent_price__"]').textContent + '\n' + b.href);
       var parentNode = b.closet('div');
       if (parentNode.querySelector('#mid_' + mid)) continue;
@@ -39,6 +41,10 @@ var naverShoppingHelper = {
       parentNode.prepend(span);
       b.style = 'padding-top:2px';
     }
+    var div = document.createElement('div');
+    div.innerHTML = mids.join('<br>');
+    div.style = 'margin:10px;';
+    document.querySelector('div[class*="seller_content_seller__"]').append(div);
   },
 }
 
