@@ -32,7 +32,7 @@ var naverShoppingHelper = {
       var mid = b.getAttribute('data-i');
       mids.push(mid);
       console.log(mid + '\n' + b.querySelector('span[class*="productContent_seller__"]').textContent + '\n' + b.querySelector('div[class*="productContent_info_title__"]').textContent + '\n' + b.querySelector('span[class*="productContent_price__"]').textContent + '\n' + b.href);
-      var parentNode = b.closet('div');
+      var parentNode = b.closest('div');
       if (parentNode.querySelector('#mid_' + mid)) continue;
       var span = document.createElement('span');
       span.id = 'mid_' + mid;
