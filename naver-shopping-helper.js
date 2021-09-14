@@ -53,12 +53,12 @@ var naverShoppingHelper = {
     if (!textarea) {
       textarea = document.createElement('textarea');
       textarea.id = 'mids';
-      textarea.readonly = 'readonly';
+      textarea.readOnly = true;
       textarea.style = 'margin:10px;width:400px;';
       rootNode.append(textarea);
       var btn = document.createElement('button');
-      btn.value = 'COPY';
-      btn.onclick = 'document.getElementById("'+ textarea.id +'").select();document.execCommand("Copy");';
+      btn.innerText = 'COPY';
+      btn.onClick = 'document.getElementById("mids").select();document.execCommand("Copy");';
       rootNode.append(btn);
     }
     textarea.rows = mids.length;
