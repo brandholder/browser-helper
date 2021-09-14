@@ -24,6 +24,12 @@ var naverShoppingHelper = {
       }, delay);
     });
   },
+  copy: function(id) {
+    var copyText = document.getElementById(id);
+    copyText.select();
+    document.execCommand("Copy");
+    console.log('Copied!');
+  },
   getCatalogProductLinks: async function() {
     await this.scrollPageToBottom();
     var mids = [];
@@ -43,16 +49,20 @@ var naverShoppingHelper = {
     }
     
     var rootNode = document.querySelector('div[class*="seller_content_seller__"]');
-    var divMids = rootNode.querySelector('#mids');
-    if (divMids) {
-      divMids.innerHTML = mids.join('<br>');
-    } else {
-      var div = document.createElement('div');
-      div.id = 'mids';
-      div.innerHTML = mids.join('<br>');
-      div.style = 'margin:10px;';
-      rootNode.append(div);
+    var textarea = rootNode.querySelector('#mids');
+    if (!textarea) {
+      textarea = document.createElement('textarea');
+      textarea.id = 'mids';
+      textarea.readonly = 'readonly';
+      textarea.style = 'margin:10px;width:400px;';
+      rootNode.append(textarea);
+      var btn = document.createElement('button');
+      btn.value = 'COPY';
+      btn.onclick = 'document.getElementById("'+ textarea.id +'").select();document.execCommand("Copy");';
+      rootNode.append(btn);
     }
+    textarea.rows = mids.length;
+    textarea.value = mids.join('\n');
   },
 }
 
