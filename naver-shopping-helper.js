@@ -59,7 +59,10 @@ var naverShoppingHelper = {
       var btn = document.createElement('button');
       btn.innerText = 'COPY';
       btn.style = 'display:block;padding:10px;';
-      btn.onClick = 'document.getElementById("mids").select();document.execCommand("Copy");';
+      btn.onclick = function() {
+        document.getElementById("mids").select();
+        document.execCommand("Copy");
+      }
       rootNode.append(btn);
     }
     textarea.rows = mids.length;
