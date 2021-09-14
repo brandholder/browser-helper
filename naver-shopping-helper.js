@@ -54,10 +54,11 @@ var naverShoppingHelper = {
       textarea = document.createElement('textarea');
       textarea.id = 'mids';
       textarea.readOnly = true;
-      textarea.style = 'margin:10px;width:400px;';
+      textarea.style = 'margin-left:10px;width:300px;';
       rootNode.append(textarea);
       var btn = document.createElement('button');
       btn.innerText = 'COPY';
+      btn.style = 'display:block;padding:10px;';
       btn.onClick = 'document.getElementById("mids").select();document.execCommand("Copy");';
       rootNode.append(btn);
     }
