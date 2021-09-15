@@ -49,12 +49,15 @@ var naverShoppingHelper = {
     }
     
     var rootNode = document.querySelector('div[class*="seller_content_seller__"]');
-    var textarea = rootNode.querySelector('#mids');
+    var textarea = document.getElementById('mids');
     if (!textarea) {
+      divMids = document.createElement('div');
+      divMids.id = 'mids_container';
+      divMids.style = 'margin:10px;';
       textarea = document.createElement('textarea');
       textarea.id = 'mids';
       textarea.readOnly = true;
-      textarea.style = 'margin-left:10px;width:300px;';
+      textarea.style = 'width:300px;';
       rootNode.append(textarea);
       var btn = document.createElement('button');
       btn.innerText = 'COPY';
@@ -63,7 +66,8 @@ var naverShoppingHelper = {
         document.getElementById("mids").select();
         document.execCommand("Copy");
       }
-      rootNode.append(btn);
+      divMids.append(textarea, btn);
+      rootNode.append(divMids);
     }
     textarea.rows = mids.length;
     textarea.value = mids.join('\n');
