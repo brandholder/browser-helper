@@ -35,9 +35,9 @@ var naverShoppingHelper = {
   },
   getCatalogProductLinks: async function() {
     await this.scrollPageToBottom();
-    var s = document.querySelectorAll('button[class*="product_btn_similar_item__"]');
-    for(var z of s){
-      s.click();
+    var btns = document.querySelectorAll('button[class*="product_btn_similar_item__"]');
+    for(var b of btns){
+      b.click();
     }
     await this.sleep(3000);
     var mids = [];
