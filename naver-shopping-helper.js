@@ -1,4 +1,7 @@
 var naverShoppingHelper = {
+  sleep: async function(ms = 1000) {
+    return new Promise((r) => setTimeout(r, ms));
+  },
   scrollPageToBottom: async function(step = 250, delay = 100) {
     console.log('page scroll down...');
     
@@ -32,6 +35,11 @@ var naverShoppingHelper = {
   },
   getCatalogProductLinks: async function() {
     await this.scrollPageToBottom();
+    var s = document.querySelectorAll('button[class*=""product_btn_similar_item__"]');
+    for(var z of s){
+      s.click();
+    }
+    await this.sleep(3000);
     var mids = [];
     var a = document.querySelectorAll('ul[class*="products_seller_list__"] li a[class*="productContent_link_seller__"]');
     for(var b of a){
