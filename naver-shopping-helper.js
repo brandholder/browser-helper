@@ -43,9 +43,17 @@ var naverShoppingHelper = {
       'div[class*="seller_more_area"] a[class*="main_link_more__"'
     );
     if (btnSellerMore) {
+      alert('전체 판매처 보러가기 페이지가 새창으로 열립니다.\n\n해당 페이지에서 스크립트를 다시 실행해주세요.');
       btnSellerMore.click();
-      await this.sleep(5000);
-      await this.getCatalogProductLinksBySellerAll();
+      return;
+    }
+
+    // 전체 판매자 상품 보기 페이지인지 확인
+    var a = document.querySelectorAll(
+      'ul[class*="products_seller_list__"] li a[class*="productContent_link_seller__"]'
+    );
+    if (a.length) {
+      await this.getCatalogProductLinksBySellerAll(a);
       return;
     }
 
@@ -66,10 +74,10 @@ var naverShoppingHelper = {
       console.log(
         mid +
           "\n" +
-          b.querySelector('span[class*="productPerMall_mall__"]')
-            .textContent +
+          b.querySelector('span[class*="productPerMall_mall__"]').textContent +
           "\n" +
-          b.querySelector('span[class*="productPerMall_info_price__"]').textContent +
+          b.querySelector('span[class*="productPerMall_info_price__"]')
+            .textContent +
           "\n" +
           link.href
       );
@@ -81,36 +89,14 @@ var naverShoppingHelper = {
       b.prepend(span);
     }
 
-    var rootNode = document.querySelector(
-      'div[class*="seller_seller_area__"]'
-    );
-    var textarea = document.getElementById("mids");
-    if (!textarea) {
-      divMids = document.createElement("div");
-      divMids.id = "mids_container";
-      divMids.style = "margin:10px;";
-      textarea = document.createElement("textarea");
-      textarea.id = "mids";
-      textarea.readOnly = true;
-      textarea.style = "width:300px;";
-      rootNode.append(textarea);
-      var btn = document.createElement("button");
-      btn.innerText = "COPY";
-      btn.style = "display:block;padding:10px;";
-      btn.onclick = function () {
-        this.copy(document.querySelector(textarea.id).value);
-      };
-      divMids.append(textarea, btn);
-      rootNode.append(divMids);
-    }
-    textarea.rows = mids.length;
-    textarea.value = mids.join("\n");
+    var rootNode = document.querySelector('div[class*="seller_seller_area__"]');
+    this._appendTextarea(rootNode, mids);
   },
-  getCatalogProductLinksBySellerAll: async function () {
+  getCatalogProductLinksBySellerAll: async function (a) {
     // 전체 판매자 상품 보기
-    var a = document.querySelectorAll(
-      'ul[class*="products_seller_list__"] li a[class*="productContent_link_seller__"]'
-    );
+    // var a = document.querySelectorAll(
+    //   'ul[class*="products_seller_list__"] li a[class*="productContent_link_seller__"]'
+    // );
     if (!a.length) {
       console.error("Not found seller all links.");
       return;
@@ -154,9 +140,10 @@ var naverShoppingHelper = {
       b.style = "padding-top:2px";
     }
 
-    var rootNode = document.querySelector(
-      'div[class*="seller_content_seller__"]'
-    );
+    var rootNode = document.querySelector('div[class*="seller_content_seller__"]');
+    this._appendTextarea(rootNode, mids);
+  },
+  _appendTextarea: function (rootNode, mids) {
     var textarea = document.getElementById("mids");
     if (!textarea) {
       divMids = document.createElement("div");
@@ -171,13 +158,14 @@ var naverShoppingHelper = {
       btn.innerText = "COPY";
       btn.style = "display:block;padding:10px;";
       btn.onclick = function () {
-        this.copy(document.querySelector(textarea.id).value);
+        naverShoppingHelper.copy(document.querySelector("#mids").value);
       };
       divMids.append(textarea, btn);
       rootNode.append(divMids);
     }
     textarea.rows = mids.length;
     textarea.value = mids.join("\n");
+    textarea.scrollIntoView();
   },
 };
 
