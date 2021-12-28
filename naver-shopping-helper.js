@@ -58,6 +58,7 @@ var naverShoppingHelper = {
       return;
     }
 
+    var mids = [];
     for (var b of a) {
       var link = b.querySelector('a[class*="productPerMall_link_seller__"]');
       var mid = link.getAttribute("data-i");
@@ -123,10 +124,10 @@ var naverShoppingHelper = {
       b.click();
     }
     await this.sleep(3000);
-    var mids = [];
     var a = document.querySelectorAll(
       'ul[class*="products_seller_list__"] li a[class*="productContent_link_seller__"]'
     );
+    var mids = [];
     for (var b of a) {
       var mid = b.getAttribute("data-i");
       mids.push(mid);
